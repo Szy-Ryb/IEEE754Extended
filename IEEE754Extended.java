@@ -99,7 +99,7 @@ public class IEEE754Extended { // główna klasa programu w Javie
 
                     String hex = String.format("%20s", calosc.toString(16).toUpperCase()).replace(' ', '0'); // hex na 20 cyfr, wielkie litery
 
-                    String hexZeSpacjami = hex.replaceAll("(.{4})(?!$)", "$1 "); // spacja co 4 cyfry
+                    String hexZeSpacjami = hex.replaceAll("(.)(?!$)", "$1   "); // trzy spacje po każdej cyfrze (oprócz ostatniej)
 
                     System.out.println("Znak:      " + znak); // wyświetlenie bitu znaku
                     System.out.println("Wykładnik: " + wykladnikBinarny); // wyświetlenie wykładnika
