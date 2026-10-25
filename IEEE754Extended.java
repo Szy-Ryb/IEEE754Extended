@@ -39,7 +39,7 @@ public class IEEE754Extended { // główna klasa programu w Javie
                     System.out.println("Wykładnik: " + wykladnikZero); // wyświetlenie wykładnika
                     System.out.println("Mantysa:   " + mantysaZero); // wyświetlenie mantysy
                     System.out.println("Binarnie:  " + znak + " " + wykladnikZero + " " + mantysaZero); // wyświetlenie całości binarnie
-                    System.out.println("Hex:       " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
+                    System.out.println("Hex:         " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
 
                 } else {
 
