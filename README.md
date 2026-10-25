@@ -70,7 +70,7 @@ Wymagana jest Java 11 lub nowsza (metoda `String.repeat()`).
 ## Uwagi
 
 - Liczba `0.1` nie ma dokładnego zapisu binarnego, dlatego mantysa jest zaokrąglona (`...1001101`).
-- `-0` jest poprawną wartością w IEEE 754 (w przeciwieństwie do zapisu U2 dla liczb całkowitych).
+- `-0` jest poprawną wartością w IEEE 754 lecz w tym przypadku dajemy jako błąd matematyczny
 - Program nie obsługuje liczb zdenormalizowanych (poniżej ok. `3.36210314311209350626E-4932`), nieskończoności ani `NaN`. Dla takich wartości wyświetla komunikat o błędzie.
 - Liczba niezerowa o bardzo małym module (poniżej zakresu znormalizowanego) również kończy się komunikatem o błędzie, a nie zapisem zdenormalizowanym.
 
