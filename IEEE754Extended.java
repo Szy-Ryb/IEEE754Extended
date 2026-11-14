@@ -17,11 +17,15 @@ public class IEEE754Extended { // główna klasa programu w Javie
 
         String wejscie = scanner.next().replace(',', '.'); // pobranie liczby jako tekst, przecinek zamieniony na kropkę
 
-        if (wejscie.matches("-0+(\\.0*)?")) { // sprawdzenie czy użytkownik wpisał -0, -0.0, -0,00 itp. (ujemne zero nie istnieje)
-            System.out.println("NIE MA TAKIEJ LICZBY");
-        } else {
+        {
             try {
                 BigDecimal liczba = new BigDecimal(wejscie); // zamiana tekstu na dokładną liczbę dziesiętną
+
+                if (liczba.signum() == 0 && wejscie.startsWith("-")) { // -0, -0.0, -0e0 itp. (ujemne zero nie istnieje)
+                    System.out.println("NIE MA TAKIEJ LICZBY");
+                    scanner.close();
+                    return;
+                }
 
                 String znak = wejscie.startsWith("-") ? "1" : "0"; // bit znaku: 1 dla liczby ujemnej, 0 dla dodatniej
 
@@ -33,13 +37,13 @@ public class IEEE754Extended { // główna klasa programu w Javie
                     String mantysaZero = "0".repeat(64); // mantysa zero to same zera
                     BigInteger calosc = new BigInteger(znak + wykladnikZero + mantysaZero, 2); // sklejenie 80 bitów w jedną liczbę
                     String hex = String.format("%20s", calosc.toString(16).toUpperCase()).replace(' ', '0'); // hex na 20 cyfr, wielkie litery
-                    String hexZeSpacjami = hex.replaceAll("(.)(?!$)", "$1   "); // trzy spacje po każdej cyfrze (oprócz ostatniej)
+                    String hexZeSpacjami = hex.replaceAll("(.{4})(?!$)", "$1 "); // spacja po każdej czwórce cyfr (oprócz ostatniej)
 
                     System.out.println("Znak:      " + znak); // wyświetlenie bitu znaku
                     System.out.println("Wykładnik: " + wykladnikZero); // wyświetlenie wykładnika
                     System.out.println("Mantysa:   " + mantysaZero); // wyświetlenie mantysy
                     System.out.println("Binarnie:  " + znak + " " + wykladnikZero + " " + mantysaZero); // wyświetlenie całości binarnie
-                    System.out.println("Hex:         " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
+                    System.out.println("Hex:       " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
 
                 } else {
 
@@ -102,13 +106,13 @@ public class IEEE754Extended { // główna klasa programu w Javie
 
                         String hex = String.format("%20s", calosc.toString(16).toUpperCase()).replace(' ', '0'); // hex na 20 cyfr, wielkie litery
 
-                        String hexZeSpacjami = hex.replaceAll("(.)(?!$)", "$1   "); // trzy spacje po każdej cyfrze (oprócz ostatniej)
+                        String hexZeSpacjami = hex.replaceAll("(.{4})(?!$)", "$1 "); // spacja po każdej czwórce cyfr (oprócz ostatniej)
 
                         System.out.println("Znak:      " + znak); // wyświetlenie bitu znaku
                         System.out.println("Wykładnik: " + wykladnikBinarny); // wyświetlenie wykładnika
                         System.out.println("Mantysa:   " + mantysaBinarna); // wyświetlenie mantysy
                         System.out.println("Binarnie:  " + znak + " " + wykladnikBinarny + " " + mantysaBinarna); // wyświetlenie całości binarnie
-                        System.out.println("Hex:         " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
+                        System.out.println("Hex:       " + hexZeSpacjami); // wyświetlenie całości szesnastkowo
 
                     } else {
                         System.out.println("Błąd!! Liczba jest poza zakresem extended precision!"); // błąd gdy liczba wykracza poza zakres
